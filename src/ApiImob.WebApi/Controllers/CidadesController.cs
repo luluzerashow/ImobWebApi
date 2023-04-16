@@ -2,16 +2,17 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
+
 namespace ApiImob.WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]/")]
-    public class ImoveisController : ControllerBase
+    public class CidadesController : ControllerBase
     {
-        private readonly ILogger<ImoveisController> _logger;
-        private readonly IImoveisAppService _appService;
+        private readonly ILogger<CidadesController> _logger;
+        private readonly ICidadesAppService _appService;
 
-        public ImoveisController(IImoveisAppService appService, ILogger<ImoveisController> logger)
+        public CidadesController(ICidadesAppService appService, ILogger<CidadesController> logger)
         {
             _appService = appService;
             _logger = logger;
@@ -26,7 +27,7 @@ namespace ApiImob.WebApi.Controllers
         {
             try
             {
-                return Ok(await _appService.GetAllAsyncImoveis());
+                return Ok(await _appService.GetAllAsyncCidades());
             }
             catch (ArgumentException e)
             {
