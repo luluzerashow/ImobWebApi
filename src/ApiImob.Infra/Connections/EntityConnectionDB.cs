@@ -21,7 +21,7 @@ namespace ApiImob.Infra.Connections
                     .AddJsonFile("appsettings.json")
                     .Build();
 
-                optionsBuilder.UseSqlServer(config.GetConnectionString("ConectaDB"));
+                optionsBuilder.UseSqlServer(config.GetConnectionString("ConectaDB")).EnableSensitiveDataLogging();
             }
         }
 
