@@ -10,5 +10,6 @@ namespace ApiImob.Domain.Interfaces
     public interface ICidadesInfraService
     {
         Task<List<CidadesModel>> GetAllAsyncCidades();
+        Task<bool> CreateAsync(CidadesModel dados);
     }
 }

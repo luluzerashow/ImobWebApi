@@ -27,11 +27,13 @@ namespace ApiImob.WebApi.Controllers
         {
             try
             {
+                _logger.LogInformation("Iniciando Cidades-ListarTodos");
                 return Ok(await _appService.GetAllAsyncCidades());
             }
-            catch (ArgumentException e)
+            catch (ArgumentException ex)
             {
-                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+                _logger.LogError("Error ao retornar Cidades-ListarTodos", ex.Message);
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }
         }
     }

@@ -10,7 +10,7 @@ namespace ApiImob.Infra.Services
     {
         private readonly ILogger<CidadesInfraService> _logger;
 
-        public CidadesInfraService(IImoveisInfraService infraService, ILogger<CidadesInfraService> logger)
+        public CidadesInfraService(ILogger<CidadesInfraService> logger)
         {
             _logger = logger;
         }
@@ -22,6 +22,31 @@ namespace ApiImob.Infra.Services
                 List<CidadesModel> result = await context.CidadesDbSet.ToListAsync();
 
                 return result;
+            }
+        }
+
+        //trocar para viewmodel?
+        public async Task<bool> CreateAsync(CidadesModel dados)
+        {
+            using (var context = new EntityConnectionDB())
+            {
+                try
+                {
+                    var cidadeModel = new CidadesModel();
+
+                    cidadeModel.Nome = dados.Nome.ToString();
+                    cidadeModel.DataCriacao = DateTime.Now;
+                    cidadeModel.DataAtualizacao = DateTime.Now;
+
+                    await context.CidadesDbSet.AddAsync(cidadeModel);
+                    await context.SaveChangesAsync();
+
+                    return true;
+                }
+                catch(Exception ex)
+                {
+                    return false;
+                }
             }
         }
     }

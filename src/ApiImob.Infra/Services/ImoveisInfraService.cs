@@ -12,7 +12,7 @@ namespace ApiImob.Infra.Services
     {
         private readonly ILogger<ImoveisInfraService> _logger;
 
-        public ImoveisInfraService(IImoveisInfraService infraService, ILogger<ImoveisInfraService> logger)
+        public ImoveisInfraService(ILogger<ImoveisInfraService> logger)
         {
             _logger = logger;
         }
