@@ -8,19 +8,21 @@ namespace ApiImob.WebApi.Controllers
     [Route("[controller]/")]
     public class ImoveisController : ControllerBase
     {
+        private readonly ILogger<ImoveisController> _logger;
         private readonly IImoveisAppService _appService;
 
-        public ImoveisController(IImoveisAppService appService)
+        public ImoveisController(IImoveisAppService appService, ILogger<ImoveisController> logger)
         {
             _appService = appService;
+            _logger = logger;
         }
 
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        [Route("Imoveis")]
-        public async Task<IActionResult> Listar()
+        [Route("ListarTodos")]
+        public async Task<IActionResult> ListarTodos()
         {
             try
             {
