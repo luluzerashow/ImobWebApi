@@ -34,14 +34,17 @@ namespace ApiImob.IOC
         private static void RegistrarApp()
         {
             _services.AddScoped<IImoveisAppService, ImoveisAppService>();
+            _services.AddScoped<ICidadesAppService, CidadesAppService>();
         }
         private static void RegistrarDomain()
         {
             _services.AddScoped<IImoveisDomainService, ImoveisDomainService>();
+            _services.AddScoped<ICidadesDomainService, CidadesDomainService>();
         }
         private static void RegistrarInfra()
         {
             _services.AddScoped<IImoveisInfraService, ImoveisInfraService>();
+            _services.AddScoped<ICidadesInfraService, CidadesInfraService>();
         }
     }
 }
