@@ -3,6 +3,8 @@ using ApiImob.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Net;
+using System.Net.Mime;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 
 namespace ApiImob.WebApi.Controllers
@@ -51,12 +53,18 @@ namespace ApiImob.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Teste de descrição
+        /// </summary>
+        /// <param name="personFilterDbModel"></param>
+        /// <returns></returns>
         [HttpGet]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
-        [ProducesResponseType(500)]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType((int)HttpStatusCode.OK)]//200
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]//400
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]//404
         [Route("ListarPaginado")]
-        public async Task<IActionResult> ListarPaginado([FromQuery] CidadesFilterDbModel personFilterDbModel)
+        public async Task<ActionResult<List<CidadesModel>>> ListarPaginado([FromQuery] CidadesFilterDbModel personFilterDbModel)
         {
 
             _logger.LogInformation("Iniciando Cidades-ListarPaginado");
@@ -64,9 +72,9 @@ namespace ApiImob.WebApi.Controllers
 
             try
             {
-
                 var result = await _appService.GetPagedAsync(personFilterDbModel);
                 stop.Stop();
+                _logger.LogInformation("Finalizando Cidades-ListarPaginado");
                 if (result.TotalRegisters > 0)
                     return Ok(new
                     {
