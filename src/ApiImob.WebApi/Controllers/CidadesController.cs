@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Mime;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 
 namespace ApiImob.WebApi.Controllers
