@@ -1,5 +1,6 @@
 ﻿using ApiImob.Domain.Interfaces;
 using ApiImob.Domain.Models;
+using ApiImob.Domain.Models.Paginacao;
 using ApiImob.Infra.Connections;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -25,7 +26,6 @@ namespace ApiImob.Infra.Services
             }
         }
 
-        //trocar para viewmodel?
         public async Task<bool> CreateAsync(CidadesModel dados)
         {
             using (var context = new EntityConnectionDB())
@@ -43,10 +43,23 @@ namespace ApiImob.Infra.Services
 
                     return true;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     return false;
                 }
+            }
+        }
+
+        public async Task<PagedBaseResponseModel<CidadesModel>> GetPagedAsync(CidadesFilterDbModel request)
+        {
+            using (var context = new EntityConnectionDB())
+            {
+                var result = context.CidadesDbSet.AsQueryable();
+                var totalregistros = result.Count();
+                if (request.Nome is not null)
+                    result = result.Where(x => x.Nome.Contains(request.Nome));
+
+                return await PagedBaseResponseHelper.GetResponseAsync<PagedBaseResponseModel<CidadesModel>, CidadesModel>(result, request, totalregistros);
             }
         }
     }

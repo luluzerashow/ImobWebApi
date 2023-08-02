@@ -1,5 +1,6 @@
 ﻿using ApiImob.Domain.Interfaces;
 using ApiImob.Domain.Models;
+using ApiImob.Domain.Models.Paginacao;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,13 @@ namespace ApiImob.App.AppServices
         public async Task<List<CidadesModel>> GetAllAsyncCidades()
         {
             return await _domainService.GetAllAsyncCidades();
+        }
+
+        public async Task<PagedBaseResponseModel<CidadesModel>> GetPagedAsync(CidadesFilterDbModel personFilterDbModel)
+        {
+            var listapaginada = await _domainService.GetPagedAsync(personFilterDbModel);
+
+            return listapaginada;
         }
     }
 }

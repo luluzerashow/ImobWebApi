@@ -1,5 +1,7 @@
 ﻿using ApiImob.Domain.Interfaces;
 using ApiImob.Domain.Models;
+using ApiImob.Domain.Models.Paginacao;
+using ApiImob.Domain.ViewModels;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -23,6 +25,25 @@ namespace ApiImob.Domain.DomainServices
         public async Task<List<CidadesModel>> GetAllAsyncCidades()
         {
             return await _infraService.GetAllAsyncCidades();
+        }
+
+        public async Task<bool> CreateAsync(CidadesViewModel cidade)
+        {
+            var cidadeModel = new CidadesModel()
+            {
+                Nome = cidade.Nome,
+                DataAtualizacao = DateTime.Now,
+                DataCriacao = DateTime.Now,
+            };
+
+            return await _infraService.CreateAsync(cidadeModel);
+        }
+
+        public async Task<PagedBaseResponseModel<CidadesModel>> GetPagedAsync(CidadesFilterDbModel personFilterDbModel) 
+        {
+            var result = await _infraService.GetPagedAsync(personFilterDbModel);
+
+            return result;
         }
     }
 }

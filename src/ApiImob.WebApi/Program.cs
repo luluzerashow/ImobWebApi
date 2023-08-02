@@ -13,14 +13,14 @@ var builder = WebApplication.CreateBuilder(args);
 #if DEBUG
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
-    .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Information)
     .Enrich.FromLogContext()
     .WriteTo.Console()
     .CreateLogger();
 #else   
     Log.Logger = new LoggerConfiguration()
         .MinimumLevel.ControlledBy(LogLevelSwitcher.Switcher)
-        .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+        .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Information)
         .Enrich.FromLogContext()
         .WriteTo.Console(new JsonFormatter())
         .CreateLogger();    

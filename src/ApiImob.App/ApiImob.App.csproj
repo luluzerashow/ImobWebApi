@@ -14,4 +14,8 @@
     <ProjectReference Include="..\ApiImob.Domain\ApiImob.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
 </Project>
