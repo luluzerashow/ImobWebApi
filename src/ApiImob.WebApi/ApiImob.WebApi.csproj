@@ -17,5 +17,11 @@
 		<ProjectReference Include="..\ApiImob.Infra\ApiImob.Infra.csproj" />
 		<ProjectReference Include="..\ApiImob.IOC\ApiImob.IOC.csproj" />
 	</ItemGroup>
+	
+	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+	</PropertyGroup>
+	
 
 </Project>
